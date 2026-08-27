@@ -1,8 +1,1 @@
 Flask==2.2.3
-Smart Hospital Navigation & Booking System/
-Flask
-Flask-Login
-Flask-SQLAlchemy
-Werkzeug
-pdfplumber
-requests

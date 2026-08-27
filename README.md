@@ -1,4 +1,4 @@
-# 🏥 LifeLine+ — Smart Hospital Management System
+# 🏥 Smart Hospital Management System website
 
 LifeLine+ is a Flask-based web application for managing common hospital
 services: doctor appointments, bed bookings, ambulance requests, medicine

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLine+ - Book Bed</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <header class="page-header">
+            <a href="{{ url_for('dashboard') }}" class="back-btn">← Back</a>
+            <h1>🛏️ Book Bed</h1>
+        </header>
+        
+        <div class="booking-container">
+            <form method="POST" class="booking-form">
+                <div class="form-group">
+                    <label for="bed_type">Bed Type</label>
+                    <select id="bed_type" name="bed_type" required>
+                        <option value="">Select Bed Type</option>
+                        {% for bed in bed_types %}
+                        <option value="{{ bed }}">{{ bed }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="patient_name">Patient Name</label>
+                    <input type="text" id="patient_name" name="patient_name" placeholder="Patient's full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="date">Admission Date</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">Additional Notes</label>
+                    <textarea id="notes" name="notes" placeholder="Any special requirements"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-success">Book Bed</button>
+            </form>
+            
+            <div class="booking-info">
+                <h3>🛏️ Bed Information</h3>
+                <ul>
+                    <li><strong>General Ward:</strong> ₹1000/night</li>
+                    <li><strong>Semi-Private:</strong> ₹2000/night</li>
+                    <li><strong>Private Room:</strong> ₹3500/night</li>
+                    <li><strong>ICU:</strong> ₹5000/night</li>
+                    <li><strong>Emergency:</strong> ₹1500/night</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('date').value = new Date().toISOString().split('T')[0];
+    </script>
+</body>
+</html>

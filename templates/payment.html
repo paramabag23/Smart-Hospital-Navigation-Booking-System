@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLine+ - Make Payment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <header class="page-header">
+            <a href="{{ url_for('dashboard') }}" class="back-btn">← Back</a>
+            <h1>💰 Make Payment</h1>
+        </header>
+        
+        <div class="payment-container">
+            <div class="payment-form">
+                {% if pending_apps %}
+                    <h3>Select Appointment to Pay</h3>
+                    <form method="POST">
+                        <div class="form-group">
+                            <label for="appointment_id">Appointment</label>
+                            <select id="appointment_id" name="appointment_id" required>
+                                {% for app in pending_apps %}
+                                <option value="{{ app.id }}">
+                                    #{{ app.id }} - {{ app.doctor_name }} - {{ app.appointment_date }} {{ app.appointment_time }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="amount">Amount (₹)</label>
+                            <input type="number" id="amount" name="amount" value="500" min="1" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="method">Payment Method</label>
+                            <select id="method" name="method" required>
+                                <option value="UPI">UPI</option>
+                                <option value="Credit Card">Credit Card</option>
+                                <option value="Debit Card">Debit Card</option>
+                                <option value="Net Banking">Net Banking</option>
+                                <option value="Cash">Cash</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-success btn-block">Pay Now</button>
+                    </form>
+                {% else %}
+                    <div class="text-center">
+                        <h3>No pending appointments to pay for!</h3>
+                        <p>Book an appointment first to make a payment.</p>
+                        <a href="{{ url_for('book_doctor') }}" class="btn btn-primary" style="margin-top: 20px;">Book Appointment</a>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="payment-summary">
+                <h3>💡 Payment Information</h3>
+                <div class="amount">₹500</div>
+                <p>Standard consultation fee</p>
+                <hr>
+                <ul>
+                    <li><strong>UPI:</strong> Instant payment</li>
+                    <li><strong>Cards:</strong> 2% processing fee</li>
+                    <li><strong>Net Banking:</strong> All banks supported</li>
+                    <li><strong>Cash:</strong> Pay at hospital counter</li>
+                </ul>
+                <hr>
+                <p>💡 <strong>Note:</strong> Payment confirms your appointment slot. Please arrive 15 minutes early.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

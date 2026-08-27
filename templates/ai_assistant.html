@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLine+ - AI Assistant</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <header class="page-header">
+            <a href="{{ url_for('dashboard') }}" class="back-btn">← Back</a>
+            <h1>🤖 AI Health Assistant</h1>
+        </header>
+        
+        <div class="ai-container">
+            <form method="POST" class="ai-form">
+                <div class="form-group">
+                    <label for="symptoms">Describe your symptoms</label>
+                    <textarea id="symptoms" name="symptoms" rows="5" placeholder="Example: I have fever, cough, and headache for 2 days..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">🔍 Analyze Symptoms</button>
+            </form>
+            
+            {% if analysis %}
+            <div class="ai-result">
+                <h3>📊 Analysis Results</h3>
+                <pre>
+{% for item in analysis.advice %}
+{{ item }}
+{% endfor %}
+                    
+💡 Recommended Department(s): {{ analysis.departments|join(', ') }}
+                    
+📅 Please book an appointment with a doctor.
+                </pre>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

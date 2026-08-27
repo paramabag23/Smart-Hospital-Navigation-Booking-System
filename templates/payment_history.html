@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLine+ - Payment History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <header class="page-header">
+            <a href="{{ url_for('dashboard') }}" class="back-btn">← Back</a>
+            <h1>📜 Payment History</h1>
+        </header>
+        
+        <div class="card">
+            <div class="card-body">
+                {% if payments %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Appointment</th>
+                                <th>Doctor</th>
+                                <th>Amount</th>
+                                <th>Method</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for p in payments %}
+                            <tr>
+                                <td>#{{ p.id }}</td>
+                                <td>#{{ p.appointment_id }}</td>
+                                <td>{{ p.doctor_name or 'N/A' }}</td>
+                                <td>₹{{ p.amount }}</td>
+                                <td>{{ p.payment_method }}</td>
+                                <td>
+                                    <span class="status-badge status-{{ p.status }}">
+                                        {{ p.status }}
+                                    </span>
+                                </td>
+                                <td>{{ p.created_at }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div style="text-align: right; padding: 15px; font-size: 18px; font-weight: bold;">
+                        Total: ₹{{ total }}
+                    </div>
+                {% else %}
+                    <p class="text-center">No payment records found.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

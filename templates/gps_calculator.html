@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLine+ - GPS Calculator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <header class="page-header">
+            <a href="{{ url_for('dashboard') }}" class="back-btn">← Back</a>
+            <h1>📍 GPS Distance Calculator</h1>
+        </header>
+        
+        <div class="gps-container">
+            <form method="POST" class="gps-form">
+                <div class="form-group">
+                    <label for="location">Select Your Location</label>
+                    <select id="location" name="location" required>
+                        <option value="">Select Location</option>
+                        {% for loc in locations %}
+                        <option value="{{ loc }}">{{ loc }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">📍 Calculate Distance</button>
+            </form>
+            
+            {% if result %}
+            <div class="gps-result">
+                <h3>📍 Distance Information</h3>
+                <pre>
+Location: {{ result.location }}
+🏥 Hospital: City Hospital
+
+📏 Distance: {{ result.distance }} km
+
+🚗 By Car: {{ result.driving }} minutes
+🚶 By Walk: {{ result.walking }} minutes
+
+💰 Estimated Fare: ₹{{ result.fare }}
+
+💡 Hospital has free parking
+💡 Emergency entrance on east side
+                </pre>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

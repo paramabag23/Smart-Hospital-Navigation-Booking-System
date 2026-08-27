@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLine+ - Emergency</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-container emergency-page">
+        <header class="page-header emergency-header">
+            <a href="{{ url_for('dashboard') }}" class="back-btn">← Back</a>
+            <h1>🚨 Emergency</h1>
+        </header>
+        
+        <div class="emergency-container">
+            <div class="emergency-warning">
+                <div class="warning-icon">⚠️</div>
+                <h2>This is for real emergencies only!</h2>
+                <p>Misuse of emergency services is a punishable offense.</p>
+            </div>
+            
+            <form method="POST" class="emergency-form">
+                <div class="form-group">
+                    <label for="emergency_type">Emergency Type</label>
+                    <select id="emergency_type" name="emergency_type" required>
+                        <option value="Medical Emergency">Medical Emergency</option>
+                        <option value="Accident">Accident</option>
+                        <option value="Cardiac Arrest">Cardiac Arrest</option>
+                        <option value="Breathing Difficulty">Breathing Difficulty</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" placeholder="Your current location" value="Hospital">
+                </div>
+                
+                <button type="submit" class="btn btn-emergency">
+                    🚑 ACTIVATE EMERGENCY
+                </button>
+            </form>
+            
+            <div class="emergency-instructions">
+                <h3>📋 Instructions</h3>
+                <ul>
+                    <li>Stay calm and don't panic</li>
+                    <li>Do not move if you have injuries</li>
+                    <li>Keep your phone accessible</li>
+                    <li>Medical help is arriving shortly</li>
+                    <li>Ambulance has been dispatched</li>
+                </ul>
+            </div>
+        </div>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {% if category == 'emergency' %}
+                    <div class="emergency-alert">
+                        <div class="alert-icon">🚑</div>
+                        <div class="alert-content">
+                            <h3>{{ message }}</h3>
+                            <p>Emergency team has been dispatched to your location.</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

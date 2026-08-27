@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLine+ - Navigation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <header class="page-header">
+            <a href="{{ url_for('dashboard') }}" class="back-btn">← Back</a>
+            <h1>🗺️ Indoor Navigation</h1>
+        </header>
+        
+        <div class="navigation-container">
+            <div class="nav-form">
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="start">📍 Current Location</label>
+                        <select id="start" name="start" required>
+                            <option value="">Select your location</option>
+                            {% for loc in locations %}
+                            <option value="{{ loc }}">{{ loc }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="end">🎯 Destination</label>
+                        <select id="end" name="end" required>
+                            <option value="">Select destination</option>
+                            {% for loc in locations %}
+                            <option value="{{ loc }}">{{ loc }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Get Directions</button>
+                </form>
+            </div>
+            
+            {% if directions %}
+            <div class="directions-box">
+                <h3>Directions</h3>
+                <pre>{{ directions }}</pre>
+            </div>
+            {% endif %}
+            
+            <div class="hospital-map">
+                <h3>🏥 Hospital Map</h3>
+                <div class="map-container">
+                    <pre>
+    ┌────────────────────────────────────┐
+    │      [Entrance]                    │
+    │         ↓                          │
+    │      [Reception]                   │
+    │    ↙      ↓      ↘                │
+    │[Cardiology] [Emergency] [Pharmacy] │
+    │    ↓         ↓                     │
+    │[Neurology] [Orthopedics]           │
+    │    ↓                               │
+    │[Pediatrics]                        │
+    └────────────────────────────────────┘
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

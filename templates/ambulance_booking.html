@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLine+ - Book Ambulance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <header class="page-header">
+            <a href="{{ url_for('dashboard') }}" class="back-btn">← Back</a>
+            <h1>🚑 Book Ambulance</h1>
+        </header>
+        
+        <div class="booking-container">
+            <form method="POST" class="booking-form">
+                <div class="form-group">
+                    <label for="pickup_location">📍 Pickup Location</label>
+                    <input type="text" id="pickup_location" name="pickup_location" placeholder="Enter address or location" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="patient_name">Patient Name</label>
+                    <input type="text" id="patient_name" name="patient_name" placeholder="Patient's full name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact">Contact Number</label>
+                    <input type="tel" id="contact" name="contact" placeholder="Phone number" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="date">Date</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-group half">
+                        <label for="time">Time</label>
+                        <input type="time" id="time" name="time" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">Additional Notes</label>
+                    <textarea id="notes" name="notes" placeholder="Any special requirements"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-emergency">🚑 Book Ambulance</button>
+            </form>
+            
+            <div class="booking-info">
+                <h3>🚑 Ambulance Information</h3>
+                <ul>
+                    <li><strong>Base Fare:</strong> ₹500</li>
+                    <li><strong>Per KM:</strong> ₹50</li>
+                    <li><strong>Emergency:</strong> Additional ₹200</li>
+                    <li><strong>Estimated Arrival:</strong> 10-15 minutes</li>
+                    <li><strong>24/7 Service Available</strong></li>
+                </ul>
+                <div class="emergency-contact">
+                    <p>📞 Emergency Hotline: <strong>102</strong></p>
+                    <p>📞 Hospital: <strong>+91-XXXXXXXXXX</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('date').value = new Date().toISOString().split('T')[0];
+        document.getElementById('time').value = '08:00';
+    </script>
+</body>
+</html>

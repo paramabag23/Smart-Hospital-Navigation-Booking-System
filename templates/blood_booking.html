@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLine+ - Request Blood</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <header class="page-header">
+            <a href="{{ url_for('dashboard') }}" class="back-btn">← Back</a>
+            <h1>🩸 Request Blood</h1>
+        </header>
+        
+        <div class="booking-container">
+            <form method="POST" class="booking-form">
+                <div class="form-group">
+                    <label for="blood_type">Blood Type</label>
+                    <select id="blood_type" name="blood_type" required>
+                        <option value="">Select Blood Type</option>
+                        {% for bt in blood_types %}
+                        <option value="{{ bt }}">{{ bt }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="units">Number of Units</label>
+                    <input type="number" id="units" name="units" value="1" min="1" max="10" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="hospital">Hospital / Location</label>
+                    <select id="hospital" name="hospital" required>
+                        <option value="">Select Location</option>
+                        {% for bank in blood_banks %}
+                        <option value="{{ bank }}">{{ bank }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="date">Date Required</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="notes">Additional Notes</label>
+                    <textarea id="notes" name="notes" placeholder="Any special requirements"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-danger">🩸 Request Blood</button>
+            </form>
+            
+            <div class="booking-info">
+                <h3>🩸 Blood Information</h3>
+                <div class="blood-availability">
+                    <h4>Current Availability</h4>
+                    <ul>
+                        <li><span class="blood-type">A+</span> Available</li>
+                        <li><span class="blood-type">A-</span> Limited</li>
+                        <li><span class="blood-type">B+</span> Available</li>
+                        <li><span class="blood-type">B-</span> Limited</li>
+                        <li><span class="blood-type">AB+</span> Available</li>
+                        <li><span class="blood-type">AB-</span> Limited</li>
+                        <li><span class="blood-type">O+</span> Available</li>
+                        <li><span class="blood-type">O-</span> Urgent Need</li>
+                    </ul>
+                </div>
+                <div class="blood-note">
+                    <p>💡 <strong>Blood Donation:</strong> Please consider donating blood. One donation can save up to 3 lives!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('date').value = new Date().toISOString().split('T')[0];
+    </script>
+</body>
+</html>

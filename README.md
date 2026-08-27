@@ -6,6 +6,11 @@ orders, blood requests, emergency alerts, payments, indoor navigation, a
 basic symptom-checker, and a GPS distance estimator — all from a single
 patient dashboard.
 
+
+
+<img width="950" height="862" alt="Screenshot 2026-08-27 210931" src="https://github.com/user-attachments/assets/2ef3232d-59e4-46b7-8026-9d32f1f6926d" />
+
+
 ## ✨ Features
 
 | Module | Description |
